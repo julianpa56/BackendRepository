@@ -17,7 +17,7 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
     
-    public List<Usuario> list (){
+    public List<Usuario> list(){
         return usuarioRepository.findAll();
     }
     public Optional<Usuario> getOne(int id){

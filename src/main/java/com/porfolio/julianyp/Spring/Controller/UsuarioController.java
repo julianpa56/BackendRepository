@@ -15,19 +15,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.porfolio.julianyp.Spring.service.UsuarioService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/usuario")
+@CrossOrigin("*")
 public class UsuarioController {
     
     @Autowired
     UsuarioService usuarioService;
     
-    @GetMapping("/usuario")
+    @GetMapping("/lista")
     public ResponseEntity<List<Usuario>> list(){
         List<Usuario> list = usuarioService.list();
         return new ResponseEntity(list, HttpStatus.OK);
@@ -51,7 +53,7 @@ public class UsuarioController {
     @PostMapping("/create")
     public ResponseEntity<?> create( @RequestBody UsuarioDto usuarioDto){
         if(StringUtils.isBlank(usuarioDto.getNombre()))
-            return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         Usuario usuario = new Usuario(usuarioDto.getNombre(),usuarioDto.getApellido(),usuarioDto.getTitulo(),usuarioDto.getAcerca_de(),usuarioDto.getFoto_perfil());
         usuarioService.save(usuario);
         return new ResponseEntity(new Mensaje("usuario creado"), HttpStatus.OK);
@@ -59,12 +61,19 @@ public class UsuarioController {
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id,@RequestBody UsuarioDto usuarioDto){
         if(!usuarioService.existById(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(usuarioDto.getNombre()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        Usuario usuario = new Usuario(usuarioDto.getNombre(),usuarioDto.getApellido(),usuarioDto.getTitulo(),usuarioDto.getAcerca_de(),usuarioDto.getFoto_perfil());
+        if(usuarioService.existByNombre(usuarioDto.getNombre())&& usuarioService.getByNombre(usuarioDto.getNombre()).get().getId() != id)
+            return new ResponseEntity(new Mensaje("Ya existe con otro id"), HttpStatus.BAD_REQUEST);
+        Usuario usuario = usuarioService.getOne(id).get();
+        usuario.setNombre(usuarioDto.getNombre());
+        usuario.setApellido(usuarioDto.getApellido());
+        usuario.setTitulo(usuarioDto.getTitulo());
+        usuario.setAcerca_de(usuarioDto.getAcerca_de());
+        usuario.setFoto_perfil(usuarioDto.getFoto_perfil());
         usuarioService.save(usuario);
-        return new ResponseEntity(new Mensaje("skill actualizado"), HttpStatus.OK);
+        return new ResponseEntity(new Mensaje("usuario actualizado"), HttpStatus.OK);
     }
     
     @DeleteMapping("/delete/{id}")
@@ -72,6 +81,6 @@ public class UsuarioController {
         if(!usuarioService.existById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         usuarioService.delete(id);
-        return new ResponseEntity(new Mensaje("skill eliminado"), HttpStatus.OK);
+        return new ResponseEntity(new Mensaje("usuario eliminado"), HttpStatus.OK);
     }
 }

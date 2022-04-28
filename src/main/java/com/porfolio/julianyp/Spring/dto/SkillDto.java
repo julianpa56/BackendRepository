@@ -1,22 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.porfolio.julianyp.Spring.dto;
 
 import javax.validation.constraints.NotBlank;
 
-/**
- *
- * @author julia
- */
+
 public class SkillDto {
     
     @NotBlank
     private String nombre_skill;
     private String porcentaje;
     private String logo_skill;
-    private int usuario_id;
 
         public SkillDto() {
     }
@@ -25,7 +18,6 @@ public class SkillDto {
         this.nombre_skill = nombre_skill;
         this.porcentaje = porcentaje;
         this.logo_skill = logo_skill;
-        this.usuario_id = usuario_id;
     }
 
     public String getNombre_skill() {
@@ -52,12 +44,6 @@ public class SkillDto {
         this.logo_skill = logo_skill;
     }
 
-    public int getUsuario_id() {
-        return usuario_id;
-    }
-
-    public void setUsuario_id(int usuario_id) {
-        this.usuario_id = usuario_id;
-    }
+    
     
 }

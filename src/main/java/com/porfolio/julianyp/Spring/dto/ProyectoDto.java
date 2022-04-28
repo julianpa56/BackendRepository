@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.porfolio.julianyp.Spring.dto;
 
 import javax.validation.constraints.NotBlank;
 
-/**
- *
- * @author julia
- */
+
 public class ProyectoDto {
     
     @NotBlank
@@ -17,7 +11,7 @@ public class ProyectoDto {
     private String fecha_realizacion;
     private String descripcion;
     private String link_proyecto;
-    private int usuario_id;
+    
 
     public ProyectoDto() {
     }
@@ -27,7 +21,7 @@ public class ProyectoDto {
         this.fecha_realizacion = fecha_realizacion;
         this.descripcion = descripcion;
         this.link_proyecto = link_proyecto;
-        this.usuario_id = usuario_id;
+        
     }
 
     public String getNombre_proyecto() {
@@ -62,12 +56,5 @@ public class ProyectoDto {
         this.link_proyecto = link_proyecto;
     }
 
-    public int getUsuario_id() {
-        return usuario_id;
-    }
-
-    public void setUsuario_id(int usuario_id) {
-        this.usuario_id = usuario_id;
-    }
     
 }

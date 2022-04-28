@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.porfolio.julianyp.Spring.Controller;
 
 import com.porfolio.julianyp.Spring.dto.Mensaje;
@@ -13,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,13 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author julia
- */
 
 @RestController
 @RequestMapping("/proyectos")
+@CrossOrigin("*")
 public class ProyectoController {
     
     @Autowired
@@ -52,7 +47,7 @@ public class ProyectoController {
     public ResponseEntity<Proyecto> getByNombre(@PathVariable("nombre_proyecto")String nombre_proyecto){
         if (!proyectoService.existsByNombre(nombre_proyecto))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Proyecto proyecto = (Proyecto) proyectoService.getByNombre(nombre_proyecto);
+        Proyecto proyecto = (Proyecto) proyectoService.getByNombre(nombre_proyecto).get();
         return new ResponseEntity(proyecto, HttpStatus.OK);
     }
     
@@ -60,7 +55,7 @@ public class ProyectoController {
     public ResponseEntity<?> create(@RequestBody ProyectoDto proyectoDto){
         if(StringUtils.isBlank(proyectoDto.getNombre_proyecto()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        Proyecto proyecto = new Proyecto(proyectoDto.getNombre_proyecto(),proyectoDto.getFecha_realizacion(),proyectoDto.getDescripcion(),proyectoDto.getLink_proyecto(),proyectoDto.getUsuario_id());
+        Proyecto proyecto = new Proyecto(proyectoDto.getNombre_proyecto(),proyectoDto.getFecha_realizacion(),proyectoDto.getDescripcion(),proyectoDto.getLink_proyecto());
         proyectoService.save(proyecto);
         return new ResponseEntity(new Mensaje("proyecto creado"), HttpStatus.OK);
     }
@@ -71,7 +66,13 @@ public class ProyectoController {
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         if(StringUtils.isBlank(proyectoDto.getNombre_proyecto()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        Proyecto proyecto = new Proyecto(proyectoDto.getNombre_proyecto(),proyectoDto.getFecha_realizacion(),proyectoDto.getDescripcion(),proyectoDto.getLink_proyecto(),proyectoDto.getUsuario_id());
+        if(proyectoService.existsByNombre(proyectoDto.getNombre_proyecto())&& proyectoService.getByNombre(proyectoDto.getNombre_proyecto()).get().getId() != id)
+            return new ResponseEntity(new Mensaje("Ya existe con otro id"), HttpStatus.BAD_REQUEST);
+        Proyecto proyecto = proyectoService.getOne(id).get();
+        proyecto.setNombre_proyecto(proyectoDto.getNombre_proyecto());
+        proyecto.setFecha_realizacion(proyectoDto.getFecha_realizacion());
+        proyecto.setDescripcion(proyectoDto.getDescripcion());
+        proyecto.setLink_proyecto(proyectoDto.getLink_proyecto());
         proyectoService.save(proyecto);
         return new ResponseEntity(new Mensaje("proyecto actualizado"), HttpStatus.OK);
     }

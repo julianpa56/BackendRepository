@@ -18,7 +18,6 @@ public class UsuarioDto {
 
     public UsuarioDto(String nombre, String apellido, String titulo, String acerca_de, String foto_perfil) {
         
-        
         this.nombre = nombre;
         this.apellido = apellido;
         this.titulo = titulo;

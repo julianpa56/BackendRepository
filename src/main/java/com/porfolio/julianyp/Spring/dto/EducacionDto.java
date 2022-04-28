@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.porfolio.julianyp.Spring.dto;
 
 import javax.validation.constraints.NotBlank;
 
-/**
- *
- * @author julia
- */
+
 public class EducacionDto {
     @NotBlank
     private String nombre_institucion;
@@ -17,7 +11,6 @@ public class EducacionDto {
     private String logo_institucion;
     private String fecha_ingreso;
     private String fecha_egreso;
-    private int usuario_id;
 
     public EducacionDto() {
     }
@@ -28,7 +21,6 @@ public class EducacionDto {
         this.logo_institucion = logo_institucion;
         this.fecha_ingreso = fecha_ingreso;
         this.fecha_egreso = fecha_egreso;
-        this.usuario_id = usuario_id;
     }
 
     public String getNombre_institucion() {
@@ -69,14 +61,6 @@ public class EducacionDto {
 
     public void setFecha_egreso(String fecha_egreso) {
         this.fecha_egreso = fecha_egreso;
-    }
-
-    public int getUsuario_id() {
-        return usuario_id;
-    }
-
-    public void setUsuario_id(int usuario_id) {
-        this.usuario_id = usuario_id;
     }
     
 }

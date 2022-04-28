@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "proyecto")
 public class Proyecto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,17 +17,15 @@ public class Proyecto {
     private String fecha_realizacion;
     private String descripcion;
     private String link_proyecto;
-    private int usuario_id;
 
     public Proyecto() {
     }
 
-    public Proyecto( String nombre_proyecto, String fecha_realizacion, String descripcion, String link_proyecto, int usuario_id) {
+    public Proyecto( String nombre_proyecto, String fecha_realizacion, String descripcion, String link_proyecto) {
         this.nombre_proyecto = nombre_proyecto;
         this.fecha_realizacion = fecha_realizacion;
         this.descripcion = descripcion;
         this.link_proyecto = link_proyecto;
-        this.usuario_id = usuario_id;
     }
 
     public int getId() {
@@ -66,14 +66,6 @@ public class Proyecto {
 
     public void setLink_proyecto(String link_proyecto) {
         this.link_proyecto = link_proyecto;
-    }
-
-    public int getUsuario_id() {
-        return usuario_id;
-    }
-
-    public void setUsuario_id(int usuario_id) {
-        this.usuario_id = usuario_id;
     }
     
 }

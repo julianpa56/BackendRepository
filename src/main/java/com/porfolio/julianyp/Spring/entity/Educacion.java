@@ -5,32 +5,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "educacion")
 public class Educacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
     private String nombre_institucion;
     private String titulo;
     private String logo_institucion;
     private String fecha_ingreso;
     private String fecha_egreso;
-    private int usuario_id;
 
     public Educacion() {
     }
 
-    public Educacion(String nombre_institucion, String titulo, String logo_institucion, String fecha_ingreso, String fecha_egreso, int usuario_id) {
+    public Educacion(String nombre_institucion, String titulo, String logo_institucion, String fecha_ingreso, String fecha_egreso) {
         this.nombre_institucion = nombre_institucion;
         this.titulo = titulo;
         this.logo_institucion = logo_institucion;
         this.fecha_ingreso = fecha_ingreso;
         this.fecha_egreso = fecha_egreso;
-        this.usuario_id = usuario_id;
     }
-
 
     public int getId() {
         return id;
@@ -80,12 +78,4 @@ public class Educacion {
         this.fecha_egreso = fecha_egreso;
     }
 
-    public int getUsuario_id() {
-        return usuario_id;
-    }
-
-    public void setUsuario_id(int usuario_id) {
-        this.usuario_id = usuario_id;
-    }
-    
 }
