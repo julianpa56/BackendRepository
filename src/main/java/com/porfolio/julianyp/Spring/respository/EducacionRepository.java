@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EducacionRepository extends JpaRepository<Educacion, Integer>{
-    Optional<Educacion> findByNombre(String nombre_institucion);
-    boolean existByNombre(String nombre_institucion);
+    Optional<Educacion> findByNombre(String nombreInstitucion);
+    boolean existByNombre(String nombreInstitucion);
 }

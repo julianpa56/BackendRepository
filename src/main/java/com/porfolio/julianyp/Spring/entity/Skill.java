@@ -13,17 +13,17 @@ public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nombre_skill;
+    private String nombreSkill;
     private String porcentaje;
-    private String logo_skill;
+    private String logoSkill;
 
     public Skill() {
     }
    
-    public Skill( String nombre_skill, String porcentaje, String logo_skill) {
-        this.nombre_skill = nombre_skill;
+    public Skill( String nombreSkill, String porcentaje, String logoSkill) {
+        this.nombreSkill = nombreSkill;
         this.porcentaje = porcentaje;
-        this.logo_skill = logo_skill;
+        this.logoSkill = logoSkill;
     }
 
     public int getId() {
@@ -34,12 +34,12 @@ public class Skill {
         this.id = id;
     }
 
-    public String getNombre_skill() {
-        return nombre_skill;
+    public String getNombreSkill() {
+        return nombreSkill;
     }
 
-    public void setNombre_skill(String nombre_skill) {
-        this.nombre_skill = nombre_skill;
+    public void setNombreSkill(String nombreSkill) {
+        this.nombreSkill = nombreSkill;
     }
 
     public String getPorcentaje() {
@@ -50,12 +50,13 @@ public class Skill {
         this.porcentaje = porcentaje;
     }
 
-    public String getLogo_skill() {
-        return logo_skill;
+    public String getLogoSkill() {
+        return logoSkill;
     }
 
-    public void setLogo_skill(String logo_skill) {
-        this.logo_skill = logo_skill;
+    public void setLogoSkill(String logoSkill) {
+        this.logoSkill = logoSkill;
     }
-    
+
+        
 }

@@ -43,18 +43,18 @@ public class EducacionController {
     }
     
     @GetMapping("/detail/{nombre_institucion}")
-    public ResponseEntity<Educacion> getByNombre(@PathVariable("nombre_institucion")String nombre_institucion){
-        if (!educacionService.existByNombre(nombre_institucion))
+    public ResponseEntity<Educacion> getByNombre(@PathVariable("nombre_institucion")String nombreInstitucion){
+        if (!educacionService.existByNombre(nombreInstitucion))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Educacion educacion = (Educacion) educacionService.getByNombre(nombre_institucion).get();
+        Educacion educacion = (Educacion) educacionService.getByNombre(nombreInstitucion).get();
         return new ResponseEntity(educacion, HttpStatus.OK);
     }
     
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody EducacionDto educacionDto){
-        if(StringUtils.isBlank(educacionDto.getNombre_institucion()))
+        if(StringUtils.isBlank(educacionDto.getNombreInstitucion()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        Educacion educacion = new Educacion(educacionDto.getNombre_institucion(),educacionDto.getTitulo(),educacionDto.getLogo_institucion(),educacionDto.getFecha_ingreso(),educacionDto.getFecha_egreso());
+        Educacion educacion = new Educacion(educacionDto.getNombreInstitucion(),educacionDto.getTitulo(),educacionDto.getLogoInstitucion(),educacionDto.getFechaIngreso(),educacionDto.getFechaEgreso());
         educacionService.save(educacion);
         return new ResponseEntity(new Mensaje("educacion creada"), HttpStatus.OK);
     }
@@ -63,16 +63,16 @@ public class EducacionController {
     public ResponseEntity<?> update(@PathVariable("id") int id,@RequestBody EducacionDto educacionDto){
         if (!educacionService.existById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        if(StringUtils.isBlank(educacionDto.getNombre_institucion()))
+        if(StringUtils.isBlank(educacionDto.getNombreInstitucion()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        if(educacionService.existByNombre(educacionDto.getNombre_institucion())&& educacionService.getByNombre(educacionDto.getNombre_institucion()).get().getId() != id)
+        if(educacionService.existByNombre(educacionDto.getNombreInstitucion())&& educacionService.getByNombre(educacionDto.getNombreInstitucion()).get().getId() != id)
             return new ResponseEntity(new Mensaje("Ya existe con otro id"), HttpStatus.BAD_REQUEST);
         Educacion educacion = educacionService.getOne(id).get();
-        educacion.setNombre_institucion(educacionDto.getNombre_institucion());
+        educacion.setNombreInstitucion(educacionDto.getNombreInstitucion());
         educacion.setTitulo(educacionDto.getTitulo());
-        educacion.setLogo_institucion(educacionDto.getLogo_institucion());
-        educacion.setFecha_ingreso(educacionDto.getFecha_ingreso());
-        educacion.setFecha_egreso(educacionDto.getFecha_egreso());
+        educacion.setLogoInstitucion(educacionDto.getLogoInstitucion());
+        educacion.setFechaIngreso(educacionDto.getFechaIngreso());
+        educacion.setFechaEgreso(educacionDto.getFechaEgreso());
         educacionService.save(educacion);
         return new ResponseEntity(new Mensaje("educacion actualizada"), HttpStatus.OK);
     }

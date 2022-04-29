@@ -42,18 +42,18 @@ public class SkillController {
         return new ResponseEntity(skill, HttpStatus.OK);
     }
     @GetMapping("/detail/{nombre_skill}")
-    public ResponseEntity<Skill> getByNombre(@PathVariable("nombre_skill")String nombre_skill){
-        if (!skillService.existsByNombre(nombre_skill))
+    public ResponseEntity<Skill> getByNombre(@PathVariable("nombre_skill")String nombreSkill){
+        if (!skillService.existsByNombre(nombreSkill))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Skill skill = (Skill) skillService.getByNombre(nombre_skill).get();
+        Skill skill = (Skill) skillService.getByNombre(nombreSkill).get();
         return new ResponseEntity(skill, HttpStatus.OK);
     }
     
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody SkillDto skillDto){
-        if(StringUtils.isBlank(skillDto.getNombre_skill()))
+        if(StringUtils.isBlank(skillDto.getNombreSkill()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        Skill skill = new Skill(skillDto.getNombre_skill(),skillDto.getPorcentaje(),skillDto.getLogo_skill());
+        Skill skill = new Skill(skillDto.getNombreSkill(),skillDto.getPorcentaje(),skillDto.getLogoSkill());
         skillService.save(skill);
         return new ResponseEntity(new Mensaje("skill creado"), HttpStatus.OK);
     }
@@ -62,14 +62,14 @@ public class SkillController {
     public ResponseEntity<?> update(@PathVariable("id") int id,@RequestBody SkillDto skillDto){
         if (!skillService.existsById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        if(StringUtils.isBlank(skillDto.getNombre_skill()))
+        if(StringUtils.isBlank(skillDto.getNombreSkill()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        if(skillService.existsByNombre(skillDto.getNombre_skill())&& skillService.getByNombre(skillDto.getNombre_skill()).get().getId() != id)
+        if(skillService.existsByNombre(skillDto.getNombreSkill())&& skillService.getByNombre(skillDto.getNombreSkill()).get().getId() != id)
             return new ResponseEntity(new Mensaje("Ya existe con otro id"), HttpStatus.BAD_REQUEST);
         Skill skill = skillService.getOne(id).get();
-        skill.setNombre_skill(skillDto.getNombre_skill());
+        skill.setNombreSkill(skillDto.getNombreSkill());
         skill.setPorcentaje(skillDto.getPorcentaje());
-        skill.setLogo_skill(skillDto.getLogo_skill());
+        skill.setLogoSkill(skillDto.getLogoSkill());
         skillService.save(skill);
         return new ResponseEntity(new Mensaje("skill actualizado"), HttpStatus.OK);
     }

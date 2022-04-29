@@ -26,8 +26,8 @@ public class ProyectoService {
         return proyectoRepository.findById(id);
     }
     
-    public Optional<Proyecto> getByNombre(String nombre_proyecto){
-        return proyectoRepository.findByNombre(nombre_proyecto);
+    public Optional<Proyecto> getByNombre(String nombreProyecto){
+        return proyectoRepository.findByNombre(nombreProyecto);
     }
     
     public void save(Proyecto proyecto){
@@ -42,7 +42,7 @@ public class ProyectoService {
         return proyectoRepository.existsById(id);
     }
     
-    public boolean existsByNombre(String nombre_proyecto){
-        return proyectoRepository.existsByNombre(nombre_proyecto);
+    public boolean existsByNombre(String nombreProyecto){
+        return proyectoRepository.existsByNombre(nombreProyecto);
     }
 }

@@ -54,7 +54,7 @@ public class UsuarioController {
     public ResponseEntity<?> create( @RequestBody UsuarioDto usuarioDto){
         if(StringUtils.isBlank(usuarioDto.getNombre()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        Usuario usuario = new Usuario(usuarioDto.getNombre(),usuarioDto.getApellido(),usuarioDto.getTitulo(),usuarioDto.getAcerca_de(),usuarioDto.getFoto_perfil());
+        Usuario usuario = new Usuario(usuarioDto.getNombre(),usuarioDto.getApellido(),usuarioDto.getTitulo(),usuarioDto.getAcercaDe(),usuarioDto.getFotoPerfil());
         usuarioService.save(usuario);
         return new ResponseEntity(new Mensaje("usuario creado"), HttpStatus.OK);
     }
@@ -70,8 +70,8 @@ public class UsuarioController {
         usuario.setNombre(usuarioDto.getNombre());
         usuario.setApellido(usuarioDto.getApellido());
         usuario.setTitulo(usuarioDto.getTitulo());
-        usuario.setAcerca_de(usuarioDto.getAcerca_de());
-        usuario.setFoto_perfil(usuarioDto.getFoto_perfil());
+        usuario.setAcercaDe(usuarioDto.getAcercaDe());
+        usuario.setFotoPerfil(usuarioDto.getFotoPerfil());
         usuarioService.save(usuario);
         return new ResponseEntity(new Mensaje("usuario actualizado"), HttpStatus.OK);
     }

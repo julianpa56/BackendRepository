@@ -44,18 +44,18 @@ public class ProyectoController {
     }
     
     @GetMapping("/detail/{nombre_proyecto}")
-    public ResponseEntity<Proyecto> getByNombre(@PathVariable("nombre_proyecto")String nombre_proyecto){
-        if (!proyectoService.existsByNombre(nombre_proyecto))
+    public ResponseEntity<Proyecto> getByNombre(@PathVariable("nombre_proyecto")String nombreProyecto){
+        if (!proyectoService.existsByNombre(nombreProyecto))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Proyecto proyecto = (Proyecto) proyectoService.getByNombre(nombre_proyecto).get();
+        Proyecto proyecto = (Proyecto) proyectoService.getByNombre(nombreProyecto).get();
         return new ResponseEntity(proyecto, HttpStatus.OK);
     }
     
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ProyectoDto proyectoDto){
-        if(StringUtils.isBlank(proyectoDto.getNombre_proyecto()))
+        if(StringUtils.isBlank(proyectoDto.getNombreProyecto()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        Proyecto proyecto = new Proyecto(proyectoDto.getNombre_proyecto(),proyectoDto.getFecha_realizacion(),proyectoDto.getDescripcion(),proyectoDto.getLink_proyecto());
+        Proyecto proyecto = new Proyecto(proyectoDto.getNombreProyecto(),proyectoDto.getFechaRealizacion(),proyectoDto.getDescripcion(),proyectoDto.getLinkProyecto());
         proyectoService.save(proyecto);
         return new ResponseEntity(new Mensaje("proyecto creado"), HttpStatus.OK);
     }
@@ -64,15 +64,15 @@ public class ProyectoController {
     public ResponseEntity<?> update(@PathVariable("id") int id,@RequestBody ProyectoDto proyectoDto){
         if (!proyectoService.existsById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        if(StringUtils.isBlank(proyectoDto.getNombre_proyecto()))
+        if(StringUtils.isBlank(proyectoDto.getNombreProyecto()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        if(proyectoService.existsByNombre(proyectoDto.getNombre_proyecto())&& proyectoService.getByNombre(proyectoDto.getNombre_proyecto()).get().getId() != id)
+        if(proyectoService.existsByNombre(proyectoDto.getNombreProyecto())&& proyectoService.getByNombre(proyectoDto.getNombreProyecto()).get().getId() != id)
             return new ResponseEntity(new Mensaje("Ya existe con otro id"), HttpStatus.BAD_REQUEST);
         Proyecto proyecto = proyectoService.getOne(id).get();
-        proyecto.setNombre_proyecto(proyectoDto.getNombre_proyecto());
-        proyecto.setFecha_realizacion(proyectoDto.getFecha_realizacion());
+        proyecto.setNombreProyecto(proyectoDto.getNombreProyecto());
+        proyecto.setFechaRealizacion(proyectoDto.getFechaRealizacion());
         proyecto.setDescripcion(proyectoDto.getDescripcion());
-        proyecto.setLink_proyecto(proyectoDto.getLink_proyecto());
+        proyecto.setLinkProyecto(proyectoDto.getLinkProyecto());
         proyectoService.save(proyecto);
         return new ResponseEntity(new Mensaje("proyecto actualizado"), HttpStatus.OK);
     }

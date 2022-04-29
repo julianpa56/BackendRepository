@@ -26,8 +26,8 @@ public class SkillService {
         return skillRepository.findById(id);
     }
     
-    public Optional<Skill> getByNombre(String nombre_skill){
-        return skillRepository.findByNombre(nombre_skill);
+    public Optional<Skill> getByNombre(String nombreSkill){
+        return skillRepository.findByNombre(nombreSkill);
     }
     
     public void save(Skill skill){
@@ -42,7 +42,7 @@ public class SkillService {
         return skillRepository.existsById(id);
     }
     
-    public boolean existsByNombre(String nombre_skill){
-        return skillRepository.existsByNombre(nombre_skill);
+    public boolean existsByNombre(String nombreSkill){
+        return skillRepository.existsByNombre(nombreSkill);
     }
 }

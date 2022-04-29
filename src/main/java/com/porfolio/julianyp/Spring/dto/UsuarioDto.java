@@ -10,19 +10,19 @@ public class UsuarioDto {
     private String nombre;
     private String apellido;
     private String titulo;
-    private String acerca_de;
-    private String foto_perfil;
+    private String acercaDe;
+    private String fotoPerfil;
 
     public UsuarioDto() {
     }
 
-    public UsuarioDto(String nombre, String apellido, String titulo, String acerca_de, String foto_perfil) {
+    public UsuarioDto(String nombre, String apellido, String titulo, String acercaDe, String fotoPerfil) {
         
         this.nombre = nombre;
         this.apellido = apellido;
         this.titulo = titulo;
-        this.acerca_de = acerca_de;
-        this.foto_perfil = foto_perfil;
+        this.acercaDe = acercaDe;
+        this.fotoPerfil = fotoPerfil;
     }
 
     public String getNombre() {
@@ -49,22 +49,22 @@ public class UsuarioDto {
         this.titulo = titulo;
     }
 
-    public String getAcerca_de() {
-        return acerca_de;
+    public String getAcercaDe() {
+        return acercaDe;
     }
 
-    public void setAcerca_de(String acerca_de) {
-        this.acerca_de = acerca_de;
+    public void setAcercaDe(String acercaDe) {
+        this.acercaDe = acercaDe;
     }
 
-    public String getFoto_perfil() {
-        return foto_perfil;
+    public String getFotoPerfil() {
+        return fotoPerfil;
     }
 
-    public void setFoto_perfil(String foto_perfil) {
-        this.foto_perfil = foto_perfil;
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
-    
-    
+
+       
     
 }

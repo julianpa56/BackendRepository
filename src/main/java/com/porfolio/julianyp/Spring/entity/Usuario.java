@@ -16,75 +16,66 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String titulo;
-    private String acerca_de;
-    private String foto_perfil;
+    private String acercaDe;
+    private String fotoPerfil;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nombre, String apellido, String titulo, String acerca_de, String foto_perfil) {
-        this.id = id;
+    public Usuario( String nombre, String apellido, String titulo, String acercaDe, String fotoPerfil) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.titulo = titulo;
-        this.acerca_de = acerca_de;
-        this.foto_perfil = foto_perfil;
+        this.acercaDe = acercaDe;
+        this.fotoPerfil = fotoPerfil;
     }
-    public Usuario(String nombre, String apellido, String titulo, String acerca_de, String foto_perfil) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.titulo = titulo;
-        this.acerca_de = acerca_de;
-        this.foto_perfil = foto_perfil;
-    }
-    
+
     public int getId() {
         return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public String getAcerca_de() {
-        return acerca_de;
-    }
-
-    public String getFoto_perfil() {
-        return foto_perfil;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
     }
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
+
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
-    public void setAcerca_de(String acerca_de) {
-        this.acerca_de = acerca_de;
+    public String getAcercaDe() {
+        return acercaDe;
     }
 
-    public void setFoto_perfil(String foto_perfil) {
-        this.foto_perfil = foto_perfil;
+    public void setAcercaDe(String acercaDe) {
+        this.acercaDe = acercaDe;
     }
-    
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
+    }
     
 }
