@@ -7,37 +7,35 @@ import javax.validation.constraints.NotBlank;
 public class ProyectoDto {
     
     @NotBlank
-    private String nombreProyecto;
-    private String fechaRealizacion;
+    private String nombre;
+    private String fecharealizacion;
     private String descripcion;
-    private String linkProyecto;
-    
+    private String linkproyecto;
 
     public ProyectoDto() {
     }
 
-    public ProyectoDto( String nombreProyecto, String fechaRealizacion, String descripcion, String linkProyecto) {
-        this.nombreProyecto = nombreProyecto;
-        this.fechaRealizacion = fechaRealizacion;
+    public ProyectoDto(String nombre, String fecharealizacion, String descripcion, String linkproyecto) {
+        this.nombre = nombre;
+        this.fecharealizacion = fecharealizacion;
         this.descripcion = descripcion;
-        this.linkProyecto = linkProyecto;
-        
+        this.linkproyecto = linkproyecto;
     }
 
-    public String getNombreProyecto() {
-        return nombreProyecto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreProyecto(String nombreProyecto) {
-        this.nombreProyecto = nombreProyecto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getFechaRealizacion() {
-        return fechaRealizacion;
+    public String getFecharealizacion() {
+        return fecharealizacion;
     }
 
-    public void setFechaRealizacion(String fechaRealizacion) {
-        this.fechaRealizacion = fechaRealizacion;
+    public void setFecharealizacion(String fecharealizacion) {
+        this.fecharealizacion = fecharealizacion;
     }
 
     public String getDescripcion() {
@@ -48,13 +46,14 @@ public class ProyectoDto {
         this.descripcion = descripcion;
     }
 
-    public String getLinkProyecto() {
-        return linkProyecto;
+    public String getLinkproyecto() {
+        return linkproyecto;
     }
 
-    public void setLinkProyecto(String linkProyecto) {
-        this.linkProyecto = linkProyecto;
+    public void setLinkproyecto(String linkproyecto) {
+        this.linkproyecto = linkproyecto;
     }
-
+    
+    
     
 }

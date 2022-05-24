@@ -16,18 +16,18 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String titulo;
-    private String acercaDe;
-    private String fotoPerfil;
+    private String acercade;
+    private String fotoperfil;
 
     public Usuario() {
     }
 
-    public Usuario( String nombre, String apellido, String titulo, String acercaDe, String fotoPerfil) {
+    public Usuario(String nombre, String apellido, String titulo, String acercade, String fotoperfil) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.titulo = titulo;
-        this.acercaDe = acercaDe;
-        this.fotoPerfil = fotoPerfil;
+        this.acercade = acercade;
+        this.fotoperfil = fotoperfil;
     }
 
     public int getId() {
@@ -62,20 +62,22 @@ public class Usuario {
         this.titulo = titulo;
     }
 
-    public String getAcercaDe() {
-        return acercaDe;
+    public String getAcercade() {
+        return acercade;
     }
 
-    public void setAcercaDe(String acercaDe) {
-        this.acercaDe = acercaDe;
+    public void setAcercade(String acercade) {
+        this.acercade = acercade;
     }
 
-    public String getFotoPerfil() {
-        return fotoPerfil;
+    public String getFotoperfil() {
+        return fotoperfil;
     }
 
-    public void setFotoPerfil(String fotoPerfil) {
-        this.fotoPerfil = fotoPerfil;
+    public void setFotoperfil(String fotoperfil) {
+        this.fotoperfil = fotoperfil;
     }
+
+    
     
 }

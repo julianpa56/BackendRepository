@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 
 public class EducacionDto {
     @NotBlank
-    private String nombreInstitucion;
+    private String nombre;
     private String titulo;
     private String logoInstitucion;
     private String fechaIngreso;
@@ -15,20 +15,20 @@ public class EducacionDto {
     public EducacionDto() {
     }
 
-    public EducacionDto(String nombreInstitucion, String titulo, String logoInstitucion, String fechaIngreso, String fechaEgreso) {
-        this.nombreInstitucion = nombreInstitucion;
+    public EducacionDto(String nombre, String titulo, String logoInstitucion, String fechaIngreso, String fechaEgreso) {
+        this.nombre = nombre;
         this.titulo = titulo;
         this.logoInstitucion = logoInstitucion;
         this.fechaIngreso = fechaIngreso;
         this.fechaEgreso = fechaEgreso;
     }
 
-    public String getNombreInstitucion() {
-        return nombreInstitucion;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreInstitucion(String nombreInstitucion) {
-        this.nombreInstitucion = nombreInstitucion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getTitulo() {

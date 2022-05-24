@@ -7,25 +7,25 @@ import javax.validation.constraints.NotBlank;
 public class SkillDto {
     
     @NotBlank
-    private String nombreSkill;
+    private String nombre;
     private String porcentaje;
-    private String logoSkill;
+    private String logoskill;
 
         public SkillDto() {
     }
-        
-    public SkillDto(String nombreSkill, String porcentaje, String logoSkill) {
-        this.nombreSkill = nombreSkill;
+
+    public SkillDto(String nombre, String porcentaje, String logoskill) {
+        this.nombre = nombre;
         this.porcentaje = porcentaje;
-        this.logoSkill = logoSkill;
+        this.logoskill = logoskill;
     }
 
-    public String getNombreSkill() {
-        return nombreSkill;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreSkill(String nombreSkill) {
-        this.nombreSkill = nombreSkill;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getPorcentaje() {
@@ -36,13 +36,15 @@ public class SkillDto {
         this.porcentaje = porcentaje;
     }
 
-    public String getLogoSkill() {
-        return logoSkill;
+    public String getLogoskill() {
+        return logoskill;
     }
 
-    public void setLogoSkill(String logoSkill) {
-        this.logoSkill = logoSkill;
+    public void setLogoskill(String logoskill) {
+        this.logoskill = logoskill;
     }
+        
+    
 
         
     

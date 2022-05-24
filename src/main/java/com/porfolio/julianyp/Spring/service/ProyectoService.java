@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-
 @Service 
 @Transactional
-public class ProyectoService {
-    
+public class ProyectoService { 
     @Autowired
     ProyectoRepository proyectoRepository;
     
@@ -38,7 +36,7 @@ public class ProyectoService {
         proyectoRepository.deleteById(id);
     }
     
-    public boolean existsById(int id){
+    public boolean existById(int id){
         return proyectoRepository.existsById(id);
     }
     

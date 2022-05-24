@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,39 +45,42 @@ public class EducacionController {
     
     @GetMapping("/detail/{nombre_institucion}")
     public ResponseEntity<Educacion> getByNombre(@PathVariable("nombre_institucion")String nombreInstitucion){
-        if (!educacionService.existByNombre(nombreInstitucion))
+        if (!educacionService.existsByNombre(nombreInstitucion))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         Educacion educacion = (Educacion) educacionService.getByNombre(nombreInstitucion).get();
         return new ResponseEntity(educacion, HttpStatus.OK);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody EducacionDto educacionDto){
-        if(StringUtils.isBlank(educacionDto.getNombreInstitucion()))
+        if(StringUtils.isBlank(educacionDto.getNombre()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        Educacion educacion = new Educacion(educacionDto.getNombreInstitucion(),educacionDto.getTitulo(),educacionDto.getLogoInstitucion(),educacionDto.getFechaIngreso(),educacionDto.getFechaEgreso());
+        Educacion educacion = new Educacion(educacionDto.getNombre(),educacionDto.getTitulo(),educacionDto.getLogoInstitucion(),educacionDto.getFechaIngreso(),educacionDto.getFechaEgreso());
         educacionService.save(educacion);
         return new ResponseEntity(new Mensaje("educacion creada"), HttpStatus.OK);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id,@RequestBody EducacionDto educacionDto){
         if (!educacionService.existById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        if(StringUtils.isBlank(educacionDto.getNombreInstitucion()))
+        if(StringUtils.isBlank(educacionDto.getNombre()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        if(educacionService.existByNombre(educacionDto.getNombreInstitucion())&& educacionService.getByNombre(educacionDto.getNombreInstitucion()).get().getId() != id)
+        if(educacionService.existsByNombre(educacionDto.getNombre())&& educacionService.getByNombre(educacionDto.getNombre()).get().getId() != id)
             return new ResponseEntity(new Mensaje("Ya existe con otro id"), HttpStatus.BAD_REQUEST);
         Educacion educacion = educacionService.getOne(id).get();
-        educacion.setNombreInstitucion(educacionDto.getNombreInstitucion());
+        educacion.setNombre(educacionDto.getNombre());
         educacion.setTitulo(educacionDto.getTitulo());
-        educacion.setLogoInstitucion(educacionDto.getLogoInstitucion());
-        educacion.setFechaIngreso(educacionDto.getFechaIngreso());
-        educacion.setFechaEgreso(educacionDto.getFechaEgreso());
+        educacion.setLogoinstitucion(educacionDto.getLogoInstitucion());
+        educacion.setFechaingreso(educacionDto.getFechaIngreso());
+        educacion.setFechaegreso(educacionDto.getFechaEgreso());
         educacionService.save(educacion);
         return new ResponseEntity(new Mensaje("educacion actualizada"), HttpStatus.OK);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id")int id){
         if (!educacionService.existById(id))

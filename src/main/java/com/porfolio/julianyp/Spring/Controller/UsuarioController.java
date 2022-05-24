@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.porfolio.julianyp.Spring.service.UsuarioService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,38 +45,42 @@ public class UsuarioController {
     }
     @GetMapping("/detailname/{nombre}")
     public ResponseEntity<Usuario> getByNombre(@PathVariable("nombre") String nombre){
-        if(!usuarioService.existByNombre(nombre))
+        if(!usuarioService.existsByNombre(nombre))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         Usuario usuario = usuarioService.getByNombre(nombre).get();
         return new ResponseEntity(usuario, HttpStatus.OK);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create( @RequestBody UsuarioDto usuarioDto){
         if(StringUtils.isBlank(usuarioDto.getNombre()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        Usuario usuario = new Usuario(usuarioDto.getNombre(),usuarioDto.getApellido(),usuarioDto.getTitulo(),usuarioDto.getAcercaDe(),usuarioDto.getFotoPerfil());
+        Usuario usuario = new Usuario(usuarioDto.getNombre(),usuarioDto.getApellido(),usuarioDto.getTitulo(),usuarioDto.getAcercade(),usuarioDto.getFotoperfil());
         usuarioService.save(usuario);
         return new ResponseEntity(new Mensaje("usuario creado"), HttpStatus.OK);
     }
+    
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id,@RequestBody UsuarioDto usuarioDto){
         if(!usuarioService.existById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(usuarioDto.getNombre()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        if(usuarioService.existByNombre(usuarioDto.getNombre())&& usuarioService.getByNombre(usuarioDto.getNombre()).get().getId() != id)
+        if(usuarioService.existsByNombre(usuarioDto.getNombre())&& usuarioService.getByNombre(usuarioDto.getNombre()).get().getId() != id)
             return new ResponseEntity(new Mensaje("Ya existe con otro id"), HttpStatus.BAD_REQUEST);
         Usuario usuario = usuarioService.getOne(id).get();
         usuario.setNombre(usuarioDto.getNombre());
         usuario.setApellido(usuarioDto.getApellido());
         usuario.setTitulo(usuarioDto.getTitulo());
-        usuario.setAcercaDe(usuarioDto.getAcercaDe());
-        usuario.setFotoPerfil(usuarioDto.getFotoPerfil());
+        usuario.setAcercade(usuarioDto.getAcercade());
+        usuario.setFotoperfil(usuarioDto.getFotoperfil());
         usuarioService.save(usuario);
         return new ResponseEntity(new Mensaje("usuario actualizado"), HttpStatus.OK);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id")int id){
         if(!usuarioService.existById(id))

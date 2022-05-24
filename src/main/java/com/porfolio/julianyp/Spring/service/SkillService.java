@@ -38,7 +38,7 @@ public class SkillService {
         skillRepository.deleteById(id);
     }
     
-    public boolean existsById(int id){
+    public boolean existById(int id){
         return skillRepository.existsById(id);
     }
     

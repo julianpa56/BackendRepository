@@ -40,7 +40,7 @@ public class UsuarioService {
         return usuarioRepository.existsById(id);
     }
     
-    public boolean existByNombre(String nombre){
+    public boolean existsByNombre(String nombre){
         return usuarioRepository.existsByNombre(nombre);
     }
 }

@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,7 @@ public class SkillController {
     
     @GetMapping("/detail/{id}")
     public ResponseEntity<Skill> getById(@PathVariable("id")int id){
-        if (!skillService.existsById(id))
+        if (!skillService.existById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         Skill skill= skillService.getOne(id).get();
         return new ResponseEntity(skill, HttpStatus.OK);
@@ -49,34 +50,37 @@ public class SkillController {
         return new ResponseEntity(skill, HttpStatus.OK);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody SkillDto skillDto){
-        if(StringUtils.isBlank(skillDto.getNombreSkill()))
+        if(StringUtils.isBlank(skillDto.getNombre()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        Skill skill = new Skill(skillDto.getNombreSkill(),skillDto.getPorcentaje(),skillDto.getLogoSkill());
+        Skill skill = new Skill(skillDto.getNombre(),skillDto.getPorcentaje(),skillDto.getLogoskill());
         skillService.save(skill);
         return new ResponseEntity(new Mensaje("skill creado"), HttpStatus.OK);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id,@RequestBody SkillDto skillDto){
-        if (!skillService.existsById(id))
+        if (!skillService.existById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        if(StringUtils.isBlank(skillDto.getNombreSkill()))
+        if(StringUtils.isBlank(skillDto.getNombre()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-        if(skillService.existsByNombre(skillDto.getNombreSkill())&& skillService.getByNombre(skillDto.getNombreSkill()).get().getId() != id)
+        if(skillService.existsByNombre(skillDto.getNombre())&& skillService.getByNombre(skillDto.getNombre()).get().getId() != id)
             return new ResponseEntity(new Mensaje("Ya existe con otro id"), HttpStatus.BAD_REQUEST);
         Skill skill = skillService.getOne(id).get();
-        skill.setNombreSkill(skillDto.getNombreSkill());
+        skill.setNombre(skillDto.getNombre());
         skill.setPorcentaje(skillDto.getPorcentaje());
-        skill.setLogoSkill(skillDto.getLogoSkill());
+        skill.setLogoskill(skillDto.getLogoskill());
         skillService.save(skill);
         return new ResponseEntity(new Mensaje("skill actualizado"), HttpStatus.OK);
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id")int id){
-        if (!skillService.existsById(id))
+        if (!skillService.existById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         skillService.delete(id);
         return new ResponseEntity(new Mensaje("skill eliminado"), HttpStatus.OK);

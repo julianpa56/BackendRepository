@@ -13,21 +13,21 @@ public class Educacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nombreInstitucion;
+    private String nombre;
     private String titulo;
-    private String logoInstitucion;
-    private String fechaIngreso;
-    private String fechaEgreso;
+    private String logoinstitucion;
+    private String fechaingreso;
+    private String fechaegreso;
 
     public Educacion() {
     }
 
-    public Educacion(String nombreInstitucion, String titulo, String logoInstitucion, String fechaIngreso, String fechaEgreso) {
-        this.nombreInstitucion = nombreInstitucion;
+    public Educacion(String nombre, String titulo, String logoinstitucion, String fechaingreso, String fechaegreso) {
+        this.nombre = nombre;
         this.titulo = titulo;
-        this.logoInstitucion = logoInstitucion;
-        this.fechaIngreso = fechaIngreso;
-        this.fechaEgreso = fechaEgreso;
+        this.logoinstitucion = logoinstitucion;
+        this.fechaingreso = fechaingreso;
+        this.fechaegreso = fechaegreso;
     }
 
     public int getId() {
@@ -37,13 +37,13 @@ public class Educacion {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public String getNombreInstitucion() {
-        return nombreInstitucion;
+
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreInstitucion(String nombreInstitucion) {
-        this.nombreInstitucion = nombreInstitucion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getTitulo() {
@@ -54,29 +54,30 @@ public class Educacion {
         this.titulo = titulo;
     }
 
-    public String getLogoInstitucion() {
-        return logoInstitucion;
+    public String getLogoinstitucion() {
+        return logoinstitucion;
     }
 
-    public void setLogoInstitucion(String logoInstitucion) {
-        this.logoInstitucion = logoInstitucion;
+    public void setLogoinstitucion(String logoinstitucion) {
+        this.logoinstitucion = logoinstitucion;
     }
 
-    public String getFechaIngreso() {
-        return fechaIngreso;
+    public String getFechaingreso() {
+        return fechaingreso;
     }
 
-    public void setFechaIngreso(String fechaIngreso) {
-        this.fechaIngreso = fechaIngreso;
+    public void setFechaingreso(String fechaingreso) {
+        this.fechaingreso = fechaingreso;
     }
 
-    public String getFechaEgreso() {
-        return fechaEgreso;
+    public String getFechaegreso() {
+        return fechaegreso;
     }
 
-    public void setFechaEgreso(String fechaEgreso) {
-        this.fechaEgreso = fechaEgreso;
+    public void setFechaegreso(String fechaegreso) {
+        this.fechaegreso = fechaegreso;
     }
 
+    
     
 }
